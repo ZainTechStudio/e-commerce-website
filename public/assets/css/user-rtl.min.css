@@ -1,0 +1,10 @@
+.fade-out {
+  transition: opacity 0.5s ease;
+  opacity: 0;
+}
+.dz-image {
+  width: 100px; /* ya jitna chhota chahte ho */
+  height: auto; /* ya fixed height like 80px */
+  object-fit: cover; /* image ko frame mein fit karega */
+  border-radius: 8px; /* thoda rounded corners ke liye */
+}
