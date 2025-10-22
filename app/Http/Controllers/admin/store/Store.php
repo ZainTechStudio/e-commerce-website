@@ -23,7 +23,8 @@ class Store extends Controller
         if (isset($checkIfExistDefaultPage)) {
             if ($checkIfExistDefaultPage->is_draft == 1 && $checkIfExistDefaultPage->is_discard == 1) {
                 $id = $checkIfExistDefaultPage->id;
-                $data = compact('id');
+                $images = products_imgs::where('product_id', $id)->where('is_active',1)->get();
+                $data = compact('id','images');
                 return view('e-commerce.admin.store.add-product')->with($data);
             }
         }

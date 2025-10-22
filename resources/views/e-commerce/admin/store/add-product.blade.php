@@ -13,11 +13,6 @@
     <script src="../../../vendors/flatpickr/flatpickr.min.js"></script>
     <script src="../../../vendors/dropzone/dropzone-min.js"></script>
     <script>
-      // const existingImages = @json($userName ?? null);
-      // if (existingImages) {
-      //   console.log(existingImages);
-      // }
-        
         // decide form destination
         function form_Destination(submittype) {
             let form_URL = document.querySelector('.form');
@@ -34,93 +29,122 @@
         navitemsactiveness('add-product')
         navitemvisibility('nv-store')
 
-        // dropzone setup
+        Dropzone.autoDiscover = false; // Phoenix.js ke auto init ko bypass karta hai
+
+        const BASE_URL = "{{ url('/') }}";
+        const existingImages = @json($images);
         const productId = {{ $id }};
-        new Dropzone("#customDropzone", {
+
+        const dz = new Dropzone("#customDropzone", {
             url: "{{ route('add-porduct-pics') }}",
+            paramName: "image",
             maxFilesize: 5,
             maxFiles: 5,
             uploadMultiple: false,
             parallelUploads: 5,
-            paramName: "image",
             acceptedFiles: "image/*",
             addRemoveLinks: true,
             previewsContainer: "#dzPreviewContainer",
+            headers: {
+                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+            },
+
             previewTemplate: `
-        <div class="container d-flex mb-3 pb-3 border-bottom border-translucent media">
-          <div class="border p-2 col-2 rounded-2 me-2">
-            <img class="rounded-2 dz-image" data-dz-thumbnail/>
-          </div>
-          <div class="flex-1 d-flex flex-between-center">
-            <div>
-              <h6 data-dz-name class="ms-4"></h6>
-              <div class="progress-bar d-flex align-items-start">
-                <p class="mb-0 fs-9 text-body-quaternary ms-4 lh-1" data-dz-size></p>
-                <div class="dz-progress">
-                  <span class="ms-3 dz-upload" data-dz-uploadprogress></span>
-                </div>
-              </div>
-              <span class="fs-10 text-danger" data-dz-errormessage></span>
-            </div>
-            <div class="dropdown">
-              <button class="btn btn-link text-body-tertiary btn-sm dropdown-toggle btn-reveal dropdown-caret-none" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="fas fa-ellipsis-h"></span>
-              </button>
-              <div class="dropdown-menu dropdown-menu-end border border-translucent py-2">
-                <a class="dropdown-item" href="#" data-dz-remove>Remove File</a>
-              </div>
-            </div>
+    <div class="container d-flex mb-3 pb-3 border-bottom border-translucent media">
+      <div class="border p-2 col-2 rounded-2 me-2">
+        <img class="rounded-2 dz-image" data-dz-thumbnail/>
+      </div>
+      <div class="flex-1 d-flex flex-between-center">
+        <div>
+          <h6 data-dz-name class="ms-4"></h6>
+          <span class="fs-10 text-danger" data-dz-errormessage></span>
+        </div>
+        <div class="dropdown">
+          <button class="btn btn-link text-body-tertiary btn-sm dropdown-toggle btn-reveal dropdown-caret-none"
+            type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="fas fa-ellipsis-h"></span>
+          </button>
+          <div class="dropdown-menu dropdown-menu-end border border-translucent py-2">
+            <a class="dropdown-item" href="#" data-dz-remove>Remove File</a>
           </div>
         </div>
-      `,
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
+      </div>
+    </div>
+  `,
+
             init: function() {
-                this.on("sending", function(file, xhr, formData) {
+                const dropzone = this;
+
+                // 🧠 PRELOAD EXISTING IMAGES
+                if (Array.isArray(existingImages) && existingImages.length > 0) {
+                    existingImages.forEach(img => {
+                        const imageUrl = `${BASE_URL}/images/${img.img_path}`;
+                        console.log("Preloading:", imageUrl);
+
+                        const mockFile = {
+                            name: img.img_path,
+                            size: 12345,
+                            serverId: img.id,
+                            accepted: true,
+                            status: Dropzone.SUCCESS
+                        };
+
+                        dropzone.emit("addedfile", mockFile);
+                        dropzone.emit("thumbnail", mockFile, imageUrl);
+                        dropzone.emit("success", mockFile, {});
+                        dropzone.emit("complete", mockFile);
+
+
+                        // styling fix
+                        if (mockFile.previewElement) {
+                            mockFile.previewElement.classList.add("dz-success", "dz-complete");
+                        }
+
+                        dropzone.files.push(mockFile);
+                        setTimeout(() => {
+                            if (mockFile.previewElement) {
+                                const removeButton = mockFile.previewElement.querySelector(
+                                    "[data-dz-remove]");
+                                if (removeButton) {
+                                    removeButton.addEventListener("click", (e) => {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        dropzone.removeFile(mockFile);
+                                    });
+                                }
+                            }
+                        }, 300);
+                    });
+                }
+
+                // 🧠 ADD PRODUCT ID WHILE UPLOADING
+                dropzone.on("sending", function(file, xhr, formData) {
                     formData.append("product_id", productId);
                 });
-                this.on("removedfile", function(file) {
-                    if (file.serverId) {
+
+                // 🧠 DELETE FILE FROM SERVER
+                dropzone.on("removedfile", function(file) {
+                    if (file.serverId) { // 👈 ye ab dono (naye + purane) files pe chalega
                         fetch(`/admin/store/product-image/${file.serverId}`, {
-                                method: 'DELETE',
+                                method: "DELETE",
                                 headers: {
-                                    'Content-Type': 'application/json',
-                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                },
-                                body: JSON.stringify({})
-                            })
-                            .then(response => {
-                                if (!response.ok) {
-                                    throw new Error("Network response was not ok");
+                                    "Content-Type": "application/json",
+                                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
                                 }
-                                return response.json();
                             })
-                            .then(data => {
-                                console.log("Image deleted successfully:", data);
-                            })
-                            .catch(error => {
-                                console.error("Error deleting image:", error);
-                            });
+                            .then(res => res.json())
+                            .then(data => console.log("Deleted:", data))
+                            .catch(err => console.error("Error deleting image:", err));
+                    } else {
+                        console.log("No serverId found for:", file);
                     }
                 });
             },
 
             success: function(file, response) {
-                // Upload complete, fade out the progress bar
                 file.serverId = response.image_id;
-                console.log(response);
-                const progressBar = file.previewElement.querySelector(".dz-progress");
-                if (progressBar) {
-                    progressBar.style.transition = "opacity 0.5s ease";
-                    progressBar.style.opacity = "0";
-                    setTimeout(() => {
-                        progressBar.style.display = "none";
-                    }, 600);
-                }
-
+                console.log("Uploaded:", response);
             }
-
         });
 
 
