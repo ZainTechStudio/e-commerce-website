@@ -24,12 +24,12 @@
               <h6 class="dropdown-header text-body-highlight fs-10 py-2">24 <span class="text-body-quaternary">results</span></h6>
               <hr class="my-0" />
               <h6 class="dropdown-header text-body-highlight fs-9 border-bottom border-translucent py-2 lh-sm">Recently Searched </h6>
-              <div class="py-2"><a class="dropdown-item" href="../../../apps/e-commerce/landing/product-details.html">
+              <div class="py-2"><a class="dropdown-item" href="{{ asset('apps/e-commerce/landing/product-details.html')}}">
                   <div class="d-flex align-items-center">
                     <div class="fw-normal text-body-highlight title"><span class="fa-solid fa-clock-rotate-left" data-fa-transform="shrink-2"></span> Store Macbook</div>
                   </div>
                 </a>
-                <a class="dropdown-item" href="../../../apps/e-commerce/landing/product-details.html">
+                <a class="dropdown-item" href="{{ asset('apps/e-commerce/landing/product-details.html')}}">
                   <div class="d-flex align-items-center">
                     <div class="fw-normal text-body-highlight title"> <span class="fa-solid fa-clock-rotate-left" data-fa-transform="shrink-2"></span> MacBook Air - 13″</div>
                   </div>
@@ -37,15 +37,15 @@
               </div>
               <hr class="my-0" />
               <h6 class="dropdown-header text-body-highlight fs-9 border-bottom border-translucent py-2 lh-sm">Products</h6>
-              <div class="py-2"><a class="dropdown-item py-2 d-flex align-items-center" href="../../../apps/e-commerce/landing/product-details.html">
-                  <div class="file-thumbnail me-2"><img class="h-100 w-100 object-fit-cover rounded-3" src="../../../assets/img/products/60x60/3.png" alt="" /></div>
+              <div class="py-2"><a class="dropdown-item py-2 d-flex align-items-center" href="{{ asset('apps/e-commerce/landing/product-details.html')}}">
+                  <div class="file-thumbnail me-2"><img class="h-100 w-100 object-fit-cover rounded-3" src="{{ asset('assets/img/products/60x60/3.png')}}" alt="" /></div>
                   <div class="flex-1">
                     <h6 class="mb-0 text-body-highlight title">MacBook Air - 13″</h6>
                     <p class="fs-10 mb-0 d-flex text-body-tertiary"><span class="fw-medium text-body-tertiary text-opactity-85">8GB Memory - 1.6GHz - 128GB Storage</span></p>
                   </div>
                 </a>
-                <a class="dropdown-item py-2 d-flex align-items-center" href="../../../apps/e-commerce/landing/product-details.html">
-                  <div class="file-thumbnail me-2"><img class="img-fluid" src="../../../assets/img/products/60x60/3.png" alt="" /></div>
+                <a class="dropdown-item py-2 d-flex align-items-center" href="{{ asset('apps/e-commerce/landing/product-details.html')}}">
+                  <div class="file-thumbnail me-2"><img class="img-fluid" src="{{ asset('assets/img/products/60x60/3.png')}}" alt="" /></div>
                   <div class="flex-1">
                     <h6 class="mb-0 text-body-highlight title">MacBook Pro - 13″</h6>
                     <p class="fs-10 mb-0 d-flex text-body-tertiary"><span class="fw-medium text-body-tertiary text-opactity-85">30 Sep at 12:30 PM</span></p>
@@ -54,12 +54,12 @@
               </div>
               <hr class="my-0" />
               <h6 class="dropdown-header text-body-highlight fs-9 border-bottom border-translucent py-2 lh-sm">Quick Links</h6>
-              <div class="py-2"><a class="dropdown-item" href="../../../apps/e-commerce/landing/product-details.html">
+              <div class="py-2"><a class="dropdown-item" href="{{ asset('apps/e-commerce/landing/product-details.html')}}">
                   <div class="d-flex align-items-center">
                     <div class="fw-normal text-body-highlight title"><span class="fa-solid fa-link text-body" data-fa-transform="shrink-2"></span> Support MacBook House</div>
                   </div>
                 </a>
-                <a class="dropdown-item" href="../../../apps/e-commerce/landing/product-details.html">
+                <a class="dropdown-item" href="{{ asset('apps/e-commerce/landing/product-details.html')}}">
                   <div class="d-flex align-items-center">
                     <div class="fw-normal text-body-highlight title"> <span class="fa-solid fa-link text-body" data-fa-transform="shrink-2"></span> Store MacBook″</div>
                   </div>
@@ -67,17 +67,17 @@
               </div>
               <hr class="my-0" />
               <h6 class="dropdown-header text-body-highlight fs-9 border-bottom border-translucent py-2 lh-sm">Files</h6>
-              <div class="py-2"><a class="dropdown-item" href="../../../apps/e-commerce/landing/product-details.html">
+              <div class="py-2"><a class="dropdown-item" href="{{ asset('apps/e-commerce/landing/product-details.html')}}">
                   <div class="d-flex align-items-center">
                     <div class="fw-normal text-body-highlight title"><span class="fa-solid fa-file-zipper text-body" data-fa-transform="shrink-2"></span> Library MacBook folder.rar</div>
                   </div>
                 </a>
-                <a class="dropdown-item" href="../../../apps/e-commerce/landing/product-details.html">
+                <a class="dropdown-item" href="{{ asset('apps/e-commerce/landing/product-details.html')}}">
                   <div class="d-flex align-items-center">
                     <div class="fw-normal text-body-highlight title"> <span class="fa-solid fa-file-lines text-body" data-fa-transform="shrink-2"></span> Feature MacBook extensions.txt</div>
                   </div>
                 </a>
-                <a class="dropdown-item" href="../../../apps/e-commerce/landing/product-details.html">
+                <a class="dropdown-item" href="{{ asset('apps/e-commerce/landing/product-details.html')}}">
                   <div class="d-flex align-items-center">
                     <div class="fw-normal text-body-highlight title"> <span class="fa-solid fa-image text-body" data-fa-transform="shrink-2"></span> MacBook Pro_13.jpg</div>
                   </div>
@@ -85,18 +85,18 @@
               </div>
               <hr class="my-0" />
               <h6 class="dropdown-header text-body-highlight fs-9 border-bottom border-translucent py-2 lh-sm">Members</h6>
-              <div class="py-2"><a class="dropdown-item py-2 d-flex align-items-center" href="../../../pages/members.html">
+              <div class="py-2"><a class="dropdown-item py-2 d-flex align-items-center" href="{{ asset('pages/members.html')}}">
                   <div class="avatar avatar-l status-online  me-2 text-body">
-                    <img class="rounded-circle " src="../../../assets/img/team/40x40/10.webp" alt="" />
+                    <img class="rounded-circle " src="{{ asset('assets/img/team/40x40/10.webp')}}" alt="" />
                   </div>
                   <div class="flex-1">
                     <h6 class="mb-0 text-body-highlight title">Carry Anna</h6>
                     <p class="fs-10 mb-0 d-flex text-body-tertiary">anna@technext.it</p>
                   </div>
                 </a>
-                <a class="dropdown-item py-2 d-flex align-items-center" href="../../../pages/members.html">
+                <a class="dropdown-item py-2 d-flex align-items-center" href="{{ asset('pages/members.html')}}">
                   <div class="avatar avatar-l  me-2 text-body">
-                    <img class="rounded-circle " src="../../../assets/img/team/40x40/12.webp" alt="" />
+                    <img class="rounded-circle " src="{{ asset('assets/img/team/40x40/12.webp')}}" alt="" />
                   </div>
                   <div class="flex-1">
                     <h6 class="mb-0 text-body-highlight title">John Smith</h6>
@@ -106,12 +106,12 @@
               </div>
               <hr class="my-0" />
               <h6 class="dropdown-header text-body-highlight fs-9 border-bottom border-translucent py-2 lh-sm">Related Searches</h6>
-              <div class="py-2"><a class="dropdown-item" href="../../../apps/e-commerce/landing/product-details.html">
+              <div class="py-2"><a class="dropdown-item" href="{{ asset('apps/e-commerce/landing/product-details.html')}}">
                   <div class="d-flex align-items-center">
                     <div class="fw-normal text-body-highlight title"><span class="fa-brands fa-firefox-browser text-body" data-fa-transform="shrink-2"></span> Search in the Web MacBook</div>
                   </div>
                 </a>
-                <a class="dropdown-item" href="../../../apps/e-commerce/landing/product-details.html">
+                <a class="dropdown-item" href="{{ asset('apps/e-commerce/landing/product-details.html')}}">
                   <div class="d-flex align-items-center">
                     <div class="fw-normal text-body-highlight title"> <span class="fa-brands fa-chrome text-body" data-fa-transform="shrink-2"></span> Store MacBook″</div>
                   </div>
@@ -149,7 +149,7 @@
             <p class="mb-0 fw-semibold fs-9">My payment method not working</p><span class="fa-solid fa-paper-plane text-primary fs-9 ms-3"></span>
           </a></div>
         <div class="text-center mt-auto">
-          <div class="avatar avatar-3xl status-online"><img class="rounded-circle border border-3 border-light-subtle" src="../../../assets/img/team/30.webp" alt="" /></div>
+          <div class="avatar avatar-3xl status-online"><img class="rounded-circle border border-3 border-light-subtle" src="{{ asset('assets/img/team/30.webp')}}" alt="" /></div>
           <h5 class="mt-2 mb-3">Eric</h5>
           <p class="text-center text-body-emphasis mb-0">Ask us anything – we’ll get back to you here or by email within 24 hours.</p>
         </div>
@@ -178,9 +178,9 @@
 <div class="setting-panel-item mt-0">
   <h5 class="setting-panel-item-title">Color Scheme</h5>
   <div class="row gx-2">
-    <div class="col-4"><input class="btn-check" id="themeSwitcherLight" name="theme-color" type="radio" value="light" data-theme-control="phoenixTheme" /><label class="btn d-inline-block btn-navbar-style fs-9" for="themeSwitcherLight"> <span class="mb-2 rounded d-block"><img class="img-fluid img-prototype mb-0" src="../../../assets/img/generic/default-light.png" alt=""/></span><span class="label-text">Light</span></label></div>
-    <div class="col-4"><input class="btn-check" id="themeSwitcherDark" name="theme-color" type="radio" value="dark" data-theme-control="phoenixTheme" /><label class="btn d-inline-block btn-navbar-style fs-9" for="themeSwitcherDark"> <span class="mb-2 rounded d-block"><img class="img-fluid img-prototype mb-0" src="../../../assets/img/generic/default-dark.png" alt=""/></span><span class="label-text"> Dark</span></label></div>
-    <div class="col-4"><input class="btn-check" id="themeSwitcherAuto" name="theme-color" type="radio" value="auto" data-theme-control="phoenixTheme" /><label class="btn d-inline-block btn-navbar-style fs-9" for="themeSwitcherAuto"> <span class="mb-2 rounded d-block"><img class="img-fluid img-prototype mb-0" src="../../../assets/img/generic/auto.png" alt=""/></span><span class="label-text"> Auto</span></label></div>
+    <div class="col-4"><input class="btn-check" id="themeSwitcherLight" name="theme-color" type="radio" value="light" data-theme-control="phoenixTheme" /><label class="btn d-inline-block btn-navbar-style fs-9" for="themeSwitcherLight"> <span class="mb-2 rounded d-block"><img class="img-fluid img-prototype mb-0" src="{{ asset('assets/img/generic/default-light.png')}}" alt=""/></span><span class="label-text">Light</span></label></div>
+    <div class="col-4"><input class="btn-check" id="themeSwitcherDark" name="theme-color" type="radio" value="dark" data-theme-control="phoenixTheme" /><label class="btn d-inline-block btn-navbar-style fs-9" for="themeSwitcherDark"> <span class="mb-2 rounded d-block"><img class="img-fluid img-prototype mb-0" src="{{ asset('assets/img/generic/default-dark.png')}}" alt=""/></span><span class="label-text"> Dark</span></label></div>
+    <div class="col-4"><input class="btn-check" id="themeSwitcherAuto" name="theme-color" type="radio" value="auto" data-theme-control="phoenixTheme" /><label class="btn d-inline-block btn-navbar-style fs-9" for="themeSwitcherAuto"> <span class="mb-2 rounded d-block"><img class="img-fluid img-prototype mb-0" src="{{ asset('assets/img/generic/auto.png')}}" alt=""/></span><span class="label-text"> Auto</span></label></div>
   </div>
 </div>
 <div class="border border-translucent rounded-3 p-4 setting-panel-item bg-body-emphasis">
@@ -200,31 +200,31 @@
 <div class="setting-panel-item">
   <h5 class="setting-panel-item-title">Navigation Type</h5>
   <div class="row gx-2">
-    <div class="col-6"><input class="btn-check" id="navbarPositionVertical" name="navigation-type" type="radio" value="vertical" data-theme-control="phoenixNavbarPosition" /><label class="btn d-inline-block btn-navbar-style fs-9" for="navbarPositionVertical"> <span class="rounded d-block"><img class="img-fluid img-prototype d-dark-none" src="../../../assets/img/generic/default-light.png" alt=""/><img class="img-fluid img-prototype d-light-none" src="../../../assets/img/generic/default-dark.png" alt=""/></span><span class="label-text">Vertical</span></label></div>
-    <div class="col-6"><input class="btn-check" id="navbarPositionHorizontal" name="navigation-type" type="radio" value="horizontal" data-theme-control="phoenixNavbarPosition" /><label class="btn d-inline-block btn-navbar-style fs-9" for="navbarPositionHorizontal"> <span class="rounded d-block"><img class="img-fluid img-prototype d-dark-none" src="../../../assets/img/generic/top-default.png" alt=""/><img class="img-fluid img-prototype d-light-none" src="../../../assets/img/generic/top-default-dark.png" alt=""/></span><span class="label-text"> Horizontal</span></label></div>
-    <div class="col-6"><input class="btn-check" id="navbarPositionCombo" name="navigation-type" type="radio" value="combo" data-theme-control="phoenixNavbarPosition" /><label class="btn d-inline-block btn-navbar-style fs-9" for="navbarPositionCombo"> <span class="rounded d-block"><img class="img-fluid img-prototype d-dark-none" src="../../../assets/img/generic/nav-combo-light.png" alt=""/><img class="img-fluid img-prototype d-light-none" src="../../../assets/img/generic/nav-combo-dark.png" alt=""/></span><span class="label-text"> Combo</span></label></div>
-    <div class="col-6"><input class="btn-check" id="navbarPositionTopDouble" name="navigation-type" type="radio" value="dual-nav" data-theme-control="phoenixNavbarPosition" /><label class="btn d-inline-block btn-navbar-style fs-9" for="navbarPositionTopDouble"> <span class="rounded d-block"><img class="img-fluid img-prototype d-dark-none" src="../../../assets/img/generic/dual-light.png" alt=""/><img class="img-fluid img-prototype d-light-none" src="../../../assets/img/generic/dual-dark.png" alt=""/></span><span class="label-text"> Dual nav</span></label></div>
+    <div class="col-6"><input class="btn-check" id="navbarPositionVertical" name="navigation-type" type="radio" value="vertical" data-theme-control="phoenixNavbarPosition" /><label class="btn d-inline-block btn-navbar-style fs-9" for="navbarPositionVertical"> <span class="rounded d-block"><img class="img-fluid img-prototype d-dark-none" src="{{ asset('assets/img/generic/default-light.png')}}" alt=""/><img class="img-fluid img-prototype d-light-none" src="{{ asset('assets/img/generic/default-dark.png')}}" alt=""/></span><span class="label-text">Vertical</span></label></div>
+    <div class="col-6"><input class="btn-check" id="navbarPositionHorizontal" name="navigation-type" type="radio" value="horizontal" data-theme-control="phoenixNavbarPosition" /><label class="btn d-inline-block btn-navbar-style fs-9" for="navbarPositionHorizontal"> <span class="rounded d-block"><img class="img-fluid img-prototype d-dark-none" src="{{ asset('assets/img/generic/top-default.png')}}" alt=""/><img class="img-fluid img-prototype d-light-none" src="{{ asset('assets/img/generic/top-default-dark.png')}}" alt=""/></span><span class="label-text"> Horizontal</span></label></div>
+    <div class="col-6"><input class="btn-check" id="navbarPositionCombo" name="navigation-type" type="radio" value="combo" data-theme-control="phoenixNavbarPosition" /><label class="btn d-inline-block btn-navbar-style fs-9" for="navbarPositionCombo"> <span class="rounded d-block"><img class="img-fluid img-prototype d-dark-none" src="{{ asset('assets/img/generic/nav-combo-light.png')}}" alt=""/><img class="img-fluid img-prototype d-light-none" src="{{ asset('assets/img/generic/nav-combo-dark.png')}}" alt=""/></span><span class="label-text"> Combo</span></label></div>
+    <div class="col-6"><input class="btn-check" id="navbarPositionTopDouble" name="navigation-type" type="radio" value="dual-nav" data-theme-control="phoenixNavbarPosition" /><label class="btn d-inline-block btn-navbar-style fs-9" for="navbarPositionTopDouble"> <span class="rounded d-block"><img class="img-fluid img-prototype d-dark-none" src="{{ asset('assets/img/generic/dual-light.png')}}" alt=""/><img class="img-fluid img-prototype d-light-none" src="{{ asset('assets/img/generic/dual-dark.png')}}" alt=""/></span><span class="label-text"> Dual nav</span></label></div>
   </div>
 </div>
 <div class="setting-panel-item">
   <h5 class="setting-panel-item-title">Vertical Navbar Appearance</h5>
   <div class="row gx-2">
-    <div class="col-6"><input class="btn-check" id="navbar-style-default" type="radio" name="config.name" value="default" data-theme-control="phoenixNavbarVerticalStyle" /><label class="btn d-block w-100 btn-navbar-style fs-9" for="navbar-style-default"> <img class="img-fluid img-prototype d-dark-none" src="../../../assets/img/generic/default-light.png" alt="" /><img class="img-fluid img-prototype d-light-none" src="../../../assets/img/generic/default-dark.png" alt="" /><span class="label-text d-dark-none"> Default</span><span class="label-text d-light-none">Default</span></label></div>
-    <div class="col-6"><input class="btn-check" id="navbar-style-dark" type="radio" name="config.name" value="darker" data-theme-control="phoenixNavbarVerticalStyle" /><label class="btn d-block w-100 btn-navbar-style fs-9" for="navbar-style-dark"> <img class="img-fluid img-prototype d-dark-none" src="../../../assets/img/generic/vertical-darker.png" alt="" /><img class="img-fluid img-prototype d-light-none" src="../../../assets/img/generic/vertical-lighter.png" alt="" /><span class="label-text d-dark-none"> Darker</span><span class="label-text d-light-none">Lighter</span></label></div>
+    <div class="col-6"><input class="btn-check" id="navbar-style-default" type="radio" name="config.name" value="default" data-theme-control="phoenixNavbarVerticalStyle" /><label class="btn d-block w-100 btn-navbar-style fs-9" for="navbar-style-default"> <img class="img-fluid img-prototype d-dark-none" src="{{ asset('assets/img/generic/default-light.png')}}" alt="" /><img class="img-fluid img-prototype d-light-none" src="{{ asset('assets/img/generic/default-dark.png')}}" alt="" /><span class="label-text d-dark-none"> Default</span><span class="label-text d-light-none">Default</span></label></div>
+    <div class="col-6"><input class="btn-check" id="navbar-style-dark" type="radio" name="config.name" value="darker" data-theme-control="phoenixNavbarVerticalStyle" /><label class="btn d-block w-100 btn-navbar-style fs-9" for="navbar-style-dark"> <img class="img-fluid img-prototype d-dark-none" src="{{ asset('assets/img/generic/vertical-darker.png')}}" alt="" /><img class="img-fluid img-prototype d-light-none" src="{{ asset('assets/img/generic/vertical-lighter.png')}}" alt="" /><span class="label-text d-dark-none"> Darker</span><span class="label-text d-light-none">Lighter</span></label></div>
   </div>
 </div>
 <div class="setting-panel-item">
   <h5 class="setting-panel-item-title">Horizontal Navbar Shape</h5>
   <div class="row gx-2">
-    <div class="col-6"><input class="btn-check" id="navbarShapeDefault" name="navbar-shape" type="radio" value="default" data-theme-control="phoenixNavbarTopShape" /><label class="btn d-inline-block btn-navbar-style fs-9" for="navbarShapeDefault"> <span class="mb-2 rounded d-block"><img class="img-fluid img-prototype d-dark-none mb-0" src="../../../assets/img/generic/top-default.png" alt=""/><img class="img-fluid img-prototype d-light-none mb-0" src="../../../assets/img/generic/top-default-dark.png" alt=""/></span><span class="label-text">Default</span></label></div>
-    <div class="col-6"><input class="btn-check" id="navbarShapeSlim" name="navbar-shape" type="radio" value="slim" data-theme-control="phoenixNavbarTopShape" /><label class="btn d-inline-block btn-navbar-style fs-9" for="navbarShapeSlim"> <span class="mb-2 rounded d-block"><img class="img-fluid img-prototype d-dark-none mb-0" src="../../../assets/img/generic/top-slim.png" alt=""/><img class="img-fluid img-prototype d-light-none mb-0" src="../../../assets/img/generic/top-slim-dark.png" alt=""/></span><span class="label-text"> Slim</span></label></div>
+    <div class="col-6"><input class="btn-check" id="navbarShapeDefault" name="navbar-shape" type="radio" value="default" data-theme-control="phoenixNavbarTopShape" /><label class="btn d-inline-block btn-navbar-style fs-9" for="navbarShapeDefault"> <span class="mb-2 rounded d-block"><img class="img-fluid img-prototype d-dark-none mb-0" src="{{ asset('assets/img/generic/top-default.png')}}" alt=""/><img class="img-fluid img-prototype d-light-none mb-0" src="{{ asset('assets/img/generic/top-default-dark.png')}}" alt=""/></span><span class="label-text">Default</span></label></div>
+    <div class="col-6"><input class="btn-check" id="navbarShapeSlim" name="navbar-shape" type="radio" value="slim" data-theme-control="phoenixNavbarTopShape" /><label class="btn d-inline-block btn-navbar-style fs-9" for="navbarShapeSlim"> <span class="mb-2 rounded d-block"><img class="img-fluid img-prototype d-dark-none mb-0" src="{{ asset('assets/img/generic/top-slim.png')}}" alt=""/><img class="img-fluid img-prototype d-light-none mb-0" src="{{ asset('assets/img/generic/top-slim-dark.png')}}" alt=""/></span><span class="label-text"> Slim</span></label></div>
   </div>
 </div>
 <div class="setting-panel-item">
   <h5 class="setting-panel-item-title">Horizontal Navbar Appearance</h5>
   <div class="row gx-2">
-    <div class="col-6"><input class="btn-check" id="navbarTopDefault" name="navbar-top-style" type="radio" value="default" data-theme-control="phoenixNavbarTopStyle" /><label class="btn d-inline-block btn-navbar-style fs-9" for="navbarTopDefault"> <span class="mb-2 rounded d-block"><img class="img-fluid img-prototype d-dark-none mb-0" src="../../../assets/img/generic/top-default.png" alt=""/><img class="img-fluid img-prototype d-light-none mb-0" src="../../../assets/img/generic/top-style-darker.png" alt=""/></span><span class="label-text">Default</span></label></div>
-    <div class="col-6"><input class="btn-check" id="navbarTopDarker" name="navbar-top-style" type="radio" value="darker" data-theme-control="phoenixNavbarTopStyle" /><label class="btn d-inline-block btn-navbar-style fs-9" for="navbarTopDarker"> <span class="mb-2 rounded d-block"><img class="img-fluid img-prototype d-dark-none mb-0" src="../../../assets/img/generic/navbar-top-style-light.png" alt=""/><img class="img-fluid img-prototype d-light-none mb-0" src="../../../assets/img/generic/top-style-lighter.png" alt=""/></span><span class="label-text d-dark-none">Darker</span><span class="label-text d-light-none">Lighter</span></label></div>
+    <div class="col-6"><input class="btn-check" id="navbarTopDefault" name="navbar-top-style" type="radio" value="default" data-theme-control="phoenixNavbarTopStyle" /><label class="btn d-inline-block btn-navbar-style fs-9" for="navbarTopDefault"> <span class="mb-2 rounded d-block"><img class="img-fluid img-prototype d-dark-none mb-0" src="{{ asset('assets/img/generic/top-default.png')}}" alt=""/><img class="img-fluid img-prototype d-light-none mb-0" src="{{ asset('assets/img/generic/top-style-darker.png')}}" alt=""/></span><span class="label-text">Default</span></label></div>
+    <div class="col-6"><input class="btn-check" id="navbarTopDarker" name="navbar-top-style" type="radio" value="darker" data-theme-control="phoenixNavbarTopStyle" /><label class="btn d-inline-block btn-navbar-style fs-9" for="navbarTopDarker"> <span class="mb-2 rounded d-block"><img class="img-fluid img-prototype d-dark-none mb-0" src="{{ asset('assets/img/generic/navbar-top-style-light.png')}}" alt=""/><img class="img-fluid img-prototype d-light-none mb-0" src="{{ asset('assets/img/generic/top-style-lighter.png')}}" alt=""/></span><span class="label-text d-dark-none">Darker</span><span class="label-text d-light-none">Lighter</span></label></div>
   </div>
 </div>
 </div>
@@ -239,16 +239,16 @@
 <!-- ===============================================-->
 <!--    JavaScripts-->
 <!-- ===============================================-->
-<script src="../../../vendors/popper/popper.min.js"></script>
-<script src="../../../vendors/bootstrap/bootstrap.min.js"></script>
-<script src="../../../vendors/anchorjs/anchor.min.js"></script>
-<script src="../../../vendors/is/is.min.js"></script>
-<script src="../../../vendors/fontawesome/all.min.js"></script>
-<script src="../../../vendors/lodash/lodash.min.js"></script>
-<script src="../../../vendors/list.js/list.min.js"></script>
-<script src="../../../vendors/feather-icons/feather.min.js"></script>
-<script src="../../../vendors/dayjs/dayjs.min.js"></script>
-<script src="../../../assets/js/phoenix.js"></script>
+<script src="{{ asset('/vendors/popper/popper.min.js')}}"></script>
+<script src="{{ asset('/vendors/bootstrap/bootstrap.min.js')}}"></script>
+<script src="{{ asset('/vendors/anchorjs/anchor.min.js')}}"></script>
+<script src="{{ asset('/vendors/is/is.min.js')}}"></script>
+<script src="{{ asset('/vendors/fontawesome/all.min.js')}}"></script>
+<script src="{{ asset('/vendors/lodash/lodash.min.js')}}"></script>
+<script src="{{ asset('/vendors/list.js/list.min.js')}}"></script>
+<script src="{{ asset('/vendors/feather-icons/feather.min.js')}}"></script>
+<script src="{{ asset('/vendors/dayjs/dayjs.min.js')}}"></script>
+<script src="{{ asset('/assets/js/phoenix.js')}}"></script>
 @stack('script')
 </body>
 

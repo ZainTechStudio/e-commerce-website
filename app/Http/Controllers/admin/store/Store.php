@@ -284,7 +284,7 @@ class Store extends Controller
     public function edit_product($id)
     {
         $product = products::findOrFail($id);
-        $images = products_imgs::where('product_id', $id)->get();
+        $images = products_imgs::where('product_id', $id)->where('is_active',1)->get();
 
         return view('e-commerce.admin.store.add-product', compact('product', 'images','id'));
     }

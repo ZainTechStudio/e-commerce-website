@@ -3,16 +3,17 @@
     <title>Jewellery Artistic</title>
 @endpush
 @push('style')
-    <link href="../../../vendors/dropzone/dropzone.css" rel="stylesheet">
-    <link href="../../../vendors/choices/choices.min.css" rel="stylesheet">
-    <link href="../../../vendors/flatpickr/flatpickr.min.css" rel="stylesheet">
+    <link href="{{ asset('/vendors/dropzone/dropzone.css')}}" rel="stylesheet">
+    <link href="{{ asset('/vendors/choices/choices.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('/vendors/flatpickr/flatpickr.min.css')}}" rel="stylesheet">
 @endpush
 @push('script')
-    <script src="../../../vendors/tinymce/tinymce.min.js"></script>
-    <script src="../../../vendors/choices/choices.min.js"></script>
-    <script src="../../../vendors/flatpickr/flatpickr.min.js"></script>
-    <script src="../../../vendors/dropzone/dropzone-min.js"></script>
+    <script src="{{ asset('/vendors/tinymce/tinymce.min.js')}}"></script>
+    <script src="{{ asset('/vendors/choices/choices.min.js')}}"></script>
+    <script src="{{ asset('/vendors/flatpickr/flatpickr.min.js')}}"></script>
+    <script src="{{ asset('/vendors/dropzone/dropzone-min.js')}}"></script>             
     <script>
+        Dropzone.autoDiscover = false;
         // decide form destination
         function form_Destination(submittype) {
             let form_URL = document.querySelector('.form');
@@ -24,32 +25,32 @@
                 form_URL.setAttribute('action', "{{ route('discard-product') }}")
             }
         }
+console.log(window.location.origin
+);
 
         // highlight selected nav item 
         navitemsactiveness('add-product')
         navitemvisibility('nv-store')
 
-        Dropzone.autoDiscover = false; // Phoenix.js ke auto init ko bypass karta hai
+        Dropzone.autoDiscover = false; // Phoenix.js ke auto init ko disable karta hai
 
-        const BASE_URL = "{{ url('/') }}";
-        const existingImages = @json($images);
-        const productId = {{ $id }};
+const BASE_URL = "{{ url('/') }}";
+const existingImages = @json($images);
+const productId = {{ $id }};
 
-        const dz = new Dropzone("#customDropzone", {
-            url: "{{ route('add-porduct-pics') }}",
-            paramName: "image",
-            maxFilesize: 5,
-            maxFiles: 5,
-            uploadMultiple: false,
-            parallelUploads: 5,
-            acceptedFiles: "image/*",
-            addRemoveLinks: true,
-            previewsContainer: "#dzPreviewContainer",
-            headers: {
-                "X-CSRF-TOKEN": "{{ csrf_token() }}"
-            },
+const dz = new Dropzone("#customDropzone", {
+  url: "{{ route('add-porduct-pics') }}",
+  paramName: "image",
+  maxFilesize: 5,
+  maxFiles: 5,
+  uploadMultiple: false,
+  parallelUploads: 5,
+  acceptedFiles: "image/*",
+  addRemoveLinks: true,
+  previewsContainer: "#dzPreviewContainer",
+  headers: { "X-CSRF-TOKEN": "{{ csrf_token() }}" },
 
-            previewTemplate: `
+  previewTemplate: `
     <div class="container d-flex mb-3 pb-3 border-bottom border-translucent media">
       <div class="border p-2 col-2 rounded-2 me-2">
         <img class="rounded-2 dz-image" data-dz-thumbnail/>
@@ -72,80 +73,78 @@
     </div>
   `,
 
-            init: function() {
-                const dropzone = this;
+  init: function () {
+    const dropzone = this;
 
-                // 🧠 PRELOAD EXISTING IMAGES
-                if (Array.isArray(existingImages) && existingImages.length > 0) {
-                    existingImages.forEach(img => {
-                        const imageUrl = `${BASE_URL}/images/${img.img_path}`;
-                        console.log("Preloading:", imageUrl);
+    // 🧠 PRELOAD EXISTING IMAGES
+    if (Array.isArray(existingImages) && existingImages.length > 0) {
+      existingImages.forEach(img => {
+        const imageUrl = `${BASE_URL}/images/${img.img_path}`;
+        console.log("Preloading:", imageUrl);
 
-                        const mockFile = {
-                            name: img.img_path,
-                            size: 12345,
-                            serverId: img.id,
-                            accepted: true,
-                            status: Dropzone.SUCCESS
-                        };
+        const mockFile = {
+          name: img.img_path,
+          size: 12345,
+          serverId: img.id,
+          accepted: true,
+          status: Dropzone.SUCCESS
+        };
 
-                        dropzone.emit("addedfile", mockFile);
-                        dropzone.emit("thumbnail", mockFile, imageUrl);
-                        dropzone.emit("success", mockFile, {});
-                        dropzone.emit("complete", mockFile);
+        dropzone.emit("addedfile", mockFile);
+        dropzone.emit("thumbnail", mockFile, imageUrl);
+        dropzone.emit("success", mockFile, {});
+        dropzone.emit("complete", mockFile);
 
+        dropzone.files.push(mockFile);
 
-                        // styling fix
-                        if (mockFile.previewElement) {
-                            mockFile.previewElement.classList.add("dz-success", "dz-complete");
-                        }
+        // ⚡️ Ensure remove button works for preloaded images
+        setTimeout(() => {
+          const removeBtn = mockFile.previewElement?.querySelector("[data-dz-remove]");
+          if (removeBtn) {
+            removeBtn.addEventListener("click", (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              dropzone.removeFile(mockFile); // triggers “removedfile”
+            });
+          }
+        }, 300);
+      });
+    }
 
-                        dropzone.files.push(mockFile);
-                        setTimeout(() => {
-                            if (mockFile.previewElement) {
-                                const removeButton = mockFile.previewElement.querySelector(
-                                    "[data-dz-remove]");
-                                if (removeButton) {
-                                    removeButton.addEventListener("click", (e) => {
-                                        e.preventDefault();
-                                        e.stopPropagation();
-                                        dropzone.removeFile(mockFile);
-                                    });
-                                }
-                            }
-                        }, 300);
-                    });
-                }
+    // 🧠 Add product_id to uploads
+    dropzone.on("sending", function (file, xhr, formData) {
+      formData.append("product_id", productId);
+    });
 
-                // 🧠 ADD PRODUCT ID WHILE UPLOADING
-                dropzone.on("sending", function(file, xhr, formData) {
-                    formData.append("product_id", productId);
-                });
+    // 🧠 Delete image from server (works for both preloaded & new)
+    dropzone.on("removedfile", function (file) {
+        if (!file.serverId && file.name) {
+    const matched = existingImages.find(i => i.img_path === file.name);
+    if (matched) file.serverId = matched.id;
+  }
+      if (file.serverId) {
+        fetch(`/admin/store/product-image/${file.serverId}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": "{{ csrf_token() }}"
+          }
+        })
+          .then(res => res.json())
+          .then(data => console.log("Deleted:", data))
+          .catch(err => console.error("Error deleting image:", err));
+      } else {
+        console.log("No serverId found for:", file);
+      }
+    });
+  },
 
-                // 🧠 DELETE FILE FROM SERVER
-                dropzone.on("removedfile", function(file) {
-                    if (file.serverId) { // 👈 ye ab dono (naye + purane) files pe chalega
-                        fetch(`/admin/store/product-image/${file.serverId}`, {
-                                method: "DELETE",
-                                headers: {
-                                    "Content-Type": "application/json",
-                                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                                }
-                            })
-                            .then(res => res.json())
-                            .then(data => console.log("Deleted:", data))
-                            .catch(err => console.error("Error deleting image:", err));
-                    } else {
-                        console.log("No serverId found for:", file);
-                    }
-                });
-            },
+  success: function (file, response) {
+    file.serverId = response.image_id;
+    console.log("Uploaded:", response);
+  }
+});
 
-            success: function(file, response) {
-                file.serverId = response.image_id;
-                console.log("Uploaded:", response);
-            }
-        });
 
 
         document.addEventListener("DOMContentLoaded", function() {
@@ -329,12 +328,12 @@
                         <h4 class="mb-3"> Product Description</h4>
                         <textarea class="tinymce" name="product_discription" id="product_description"
                             data-tinymce='{"height":"15rem","placeholder":"Write a description here..."}'>
-            @if (old('product_discription'))
-{{ old('product_discription') }}
-@else
-No description yet.
-@endif
-          </textarea>
+                            @if (old('product_discription'))
+                                {{ old('product_discription') }}
+                            @else
+                                No description yet.
+                            @endif
+                        </textarea>
                         <span class="text-danger  mb-3">
                             @error('product_discription')
                                 {{ $message }}
@@ -347,7 +346,7 @@ No description yet.
                             Drag your photo here<span class="text-body-secondary px-1">or</span>
                             <button class="btn btn-link p-0" type="button">use from device</button>
                             <br>
-                            <img class="mt-3 me-2" src="../../../assets/img/icons/image-icon.png" alt="">
+                            <img class="mt-3 me-2" src="{{ asset('/assets/img/icons/image-icon.png')}}" alt="">
                         </div>
                         <div id="dzPreviewContainer" class="dz-preview dz-preview-multiple m-0 d-flex flex-column"></div>
                     </div>
