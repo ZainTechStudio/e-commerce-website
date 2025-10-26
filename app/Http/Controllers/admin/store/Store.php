@@ -24,7 +24,8 @@ class Store extends Controller
             if ($checkIfExistDefaultPage->is_draft == 1 && $checkIfExistDefaultPage->is_discard == 1) {
                 $id = $checkIfExistDefaultPage->id;
                 $images = products_imgs::where('product_id', $id)->where('is_active',1)->get();
-                $data = compact('id','images');
+                $product = $checkIfExistDefaultPage;
+                $data = compact('id','images','product');
                 return view('e-commerce.admin.store.add-product')->with($data);
             }
         }
@@ -51,9 +52,10 @@ class Store extends Controller
         $add_draft->save();
 
         // select last id
-        $view_id = products::latest('id')->first();
-        $id = $view_id->id;
-        $data = compact('id');
+        $product = products::latest('id')->first();
+        $id = $product->id;
+        $images = null;
+        $data = compact('id','images','product');
         return view('e-commerce.admin.store.add-product')->with($data);
     }
     public function add_product_pics(Request $request)
@@ -145,8 +147,8 @@ class Store extends Controller
             $product->discount_end = $end;
         }
         $product->save();
-        echo 'done';
-        // return redirect('/admin/product');
+        
+        return redirect()->route('product');
     }
     public function draft_product(Request $request)
     {
@@ -285,8 +287,10 @@ class Store extends Controller
     {
         $product = products::findOrFail($id);
         $images = products_imgs::where('product_id', $id)->where('is_active',1)->get();
-
-        return view('e-commerce.admin.store.add-product', compact('product', 'images','id'));
+        $discountFrom = \Carbon\Carbon::createFromFormat('Y-m-d', $product->discount_start)->format('d/m/y');
+        $discountTo = \Carbon\Carbon::createFromFormat('Y-m-d', $product->discount_end)->format('d/m/y');
+        $discountDuration = "$discountFrom to $discountTo";
+        return view('e-commerce.admin.store.add-product', compact('product', 'images','id','discountDuration'));
     }
     public function customer_details()
     {

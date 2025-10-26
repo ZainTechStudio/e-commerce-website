@@ -3,15 +3,15 @@
     <title>Jewellery Artistic</title>
 @endpush
 @push('style')
-    <link href="{{ asset('/vendors/dropzone/dropzone.css')}}" rel="stylesheet">
-    <link href="{{ asset('/vendors/choices/choices.min.css')}}" rel="stylesheet">
-    <link href="{{ asset('/vendors/flatpickr/flatpickr.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('/vendors/dropzone/dropzone.css') }}" rel="stylesheet">
+    <link href="{{ asset('/vendors/choices/choices.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/vendors/flatpickr/flatpickr.min.css') }}" rel="stylesheet">
 @endpush
 @push('script')
-    <script src="{{ asset('/vendors/tinymce/tinymce.min.js')}}"></script>
-    <script src="{{ asset('/vendors/choices/choices.min.js')}}"></script>
-    <script src="{{ asset('/vendors/flatpickr/flatpickr.min.js')}}"></script>
-    <script src="{{ asset('/vendors/dropzone/dropzone-min.js')}}"></script>             
+    <script src="{{ asset('/vendors/tinymce/tinymce.min.js') }}"></script>
+    <script src="{{ asset('/vendors/choices/choices.min.js') }}"></script>
+    <script src="{{ asset('/vendors/flatpickr/flatpickr.min.js') }}"></script>
+    <script src="{{ asset('/vendors/dropzone/dropzone-min.js') }}"></script>
     <script>
         Dropzone.autoDiscover = false;
         // decide form destination
@@ -25,8 +25,7 @@
                 form_URL.setAttribute('action', "{{ route('discard-product') }}")
             }
         }
-console.log(window.location.origin
-);
+        console.log(window.location.origin);
 
         // highlight selected nav item 
         navitemsactiveness('add-product')
@@ -34,23 +33,25 @@ console.log(window.location.origin
 
         Dropzone.autoDiscover = false; // Phoenix.js ke auto init ko disable karta hai
 
-const BASE_URL = "{{ url('/') }}";
-const existingImages = @json($images);
-const productId = {{ $id }};
+        const BASE_URL = "{{ url('/') }}";
+        const existingImages = @json($images)??null;
+        const productId = {{ $id }};
 
-const dz = new Dropzone("#customDropzone", {
-  url: "{{ route('add-porduct-pics') }}",
-  paramName: "image",
-  maxFilesize: 5,
-  maxFiles: 5,
-  uploadMultiple: false,
-  parallelUploads: 5,
-  acceptedFiles: "image/*",
-  addRemoveLinks: true,
-  previewsContainer: "#dzPreviewContainer",
-  headers: { "X-CSRF-TOKEN": "{{ csrf_token() }}" },
+        const dz = new Dropzone("#customDropzone", {
+            url: "{{ route('add-porduct-pics') }}",
+            paramName: "image",
+            maxFilesize: 5,
+            maxFiles: 5,
+            uploadMultiple: false,
+            parallelUploads: 5,
+            acceptedFiles: "image/*",
+            addRemoveLinks: true,
+            previewsContainer: "#dzPreviewContainer",
+            headers: {
+                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+            },
 
-  previewTemplate: `
+            previewTemplate: `
     <div class="container d-flex mb-3 pb-3 border-bottom border-translucent media">
       <div class="border p-2 col-2 rounded-2 me-2">
         <img class="rounded-2 dz-image" data-dz-thumbnail/>
@@ -73,83 +74,116 @@ const dz = new Dropzone("#customDropzone", {
     </div>
   `,
 
-  init: function () {
-    const dropzone = this;
+            init: function() {
+                const dropzone = this;
 
-    // 🧠 PRELOAD EXISTING IMAGES
-    if (Array.isArray(existingImages) && existingImages.length > 0) {
-      existingImages.forEach(img => {
-        const imageUrl = `${BASE_URL}/images/${img.img_path}`;
-        console.log("Preloading:", imageUrl);
+                // 🧠 PRELOAD EXISTING IMAGES
+                if (Array.isArray(existingImages) && existingImages.length > 0) {
+                    existingImages.forEach(img => {
+                        const imageUrl = `${BASE_URL}/images/${img.img_path}`;
+                        console.log("Preloading:", imageUrl);
 
-        const mockFile = {
-          name: img.img_path,
-          size: 12345,
-          serverId: img.id,
-          accepted: true,
-          status: Dropzone.SUCCESS
-        };
+                        const mockFile = {
+                            name: img.img_path,
+                            size: 12345,
+                            serverId: img.id,
+                            accepted: true,
+                            status: Dropzone.SUCCESS
+                        };
 
-        dropzone.emit("addedfile", mockFile);
-        dropzone.emit("thumbnail", mockFile, imageUrl);
-        dropzone.emit("success", mockFile, {});
-        dropzone.emit("complete", mockFile);
+                        dropzone.emit("addedfile", mockFile);
+                        dropzone.emit("thumbnail", mockFile, imageUrl);
+                        dropzone.emit("success", mockFile, {});
+                        dropzone.emit("complete", mockFile);
 
-        dropzone.files.push(mockFile);
+                        dropzone.files.push(mockFile);
 
-        // ⚡️ Ensure remove button works for preloaded images
-        setTimeout(() => {
-          const removeBtn = mockFile.previewElement?.querySelector("[data-dz-remove]");
-          if (removeBtn) {
-            removeBtn.addEventListener("click", (e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              dropzone.removeFile(mockFile); // triggers “removedfile”
-            });
-          }
-        }, 300);
-      });
-    }
+                        // ⚡️ Ensure remove button works for preloaded images
+                        setTimeout(() => {
+                            const removeBtn = mockFile.previewElement?.querySelector(
+                                "[data-dz-remove]");
+                            if (removeBtn) {
+                                removeBtn.addEventListener("click", (e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    dropzone.removeFile(
+                                    mockFile); // triggers “removedfile”
+                                });
+                            }
+                        }, 300);
+                    });
+                }
 
-    // 🧠 Add product_id to uploads
-    dropzone.on("sending", function (file, xhr, formData) {
-      formData.append("product_id", productId);
-    });
+                dropzone.on("sending", function(file, xhr, formData) {
+                    formData.append("product_id", productId);
+                });
 
-    // 🧠 Delete image from server (works for both preloaded & new)
-    dropzone.on("removedfile", function (file) {
-        if (!file.serverId && file.name) {
-    const matched = existingImages.find(i => i.img_path === file.name);
-    if (matched) file.serverId = matched.id;
-  }
-      if (file.serverId) {
-        fetch(`/admin/store/product-image/${file.serverId}`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-TOKEN": "{{ csrf_token() }}"
-          }
-        })
-          .then(res => res.json())
-          .then(data => console.log("Deleted:", data))
-          .catch(err => console.error("Error deleting image:", err));
-      } else {
-        console.log("No serverId found for:", file);
-      }
-    });
-  },
+                dropzone.on("removedfile", function(file) {
+                    if (!file.serverId && file.name) {
+                        const matched = existingImages.find(i => i.img_path === file.name);
+                        if (matched) file.serverId = matched.id;
+                    }
+                    if (file.serverId) {
+                        fetch(`/admin/store/product-image/${file.serverId}`, {
+                                method: "DELETE",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                                }
+                            })
+                            .then(res => res.json())
+                            .then(data => console.log("Deleted:", data))
+                            .catch(err => console.error("Error deleting image:", err));
+                    } else {
+                        console.log("No serverId found for:", file);
+                    }
+                });
+            },
 
-  success: function (file, response) {
-    file.serverId = response.image_id;
-    console.log("Uploaded:", response);
-  }
-});
+            success: function(file, response) {
+                file.serverId = response.image_id;
+                console.log("Uploaded:", response);
+            }
+        });
 
 
 
         document.addEventListener("DOMContentLoaded", function() {
             // dynamically product attribute fetch
             function attrubuteSet(attrubuteclass) {
+                let selectedAttValue = "";
+                switch (attrubuteclass) {
+                    case "category":
+                    selectedAttValue = "{{$product->category}}";
+                    break;
+                    case "material-type":
+                    selectedAttValue = "{{$product->material_type}}";
+                    
+                    break;
+                    case "occasion":
+                    selectedAttValue = "{{$product->occasion}}";
+                    
+                    break;
+                    case "gemstone":
+                    selectedAttValue = "{{$product->gemstone}}";
+                    
+                    break;
+                    case "style":
+                    selectedAttValue = "{{$product->style}}";
+                    
+                    break;
+                    case "color":
+                    selectedAttValue = "{{$product->color}}";
+                    
+                    break;
+                    case "tags":
+                    selectedAttValue = "{{$product->tag}}";
+                    
+                    break;
+                
+                    default:
+                        break;
+                }
                 let category = document.querySelector(`.${attrubuteclass}`)
                 const baseUrl = "{{ url('/') }}";
                 const apiUrl = `${baseUrl}/api/fetch/${attrubuteclass}`;
@@ -165,12 +199,17 @@ const dz = new Dropzone("#customDropzone", {
                         const option = document.createElement('option');
                         option.value = '';
                         option.textContent = 'Select';
-                        option.setAttribute('selected', 'selected');
+                        // option.setAttribute('selected', 'selected');
                         category.appendChild(option);
                         data.forEach(val => {
                             const option = document.createElement('option');
                             option.value = val.attribute_name;
                             option.textContent = val.attribute_name;
+                            if(option.value == selectedAttValue){
+                               option.setAttribute('selected', 'selected');
+                               console.log("set hogya bhi" + option.value + selectedAttValue + typeof selectedAttValue + " , " + typeof option.value);
+                               
+                            }
                             category.appendChild(option);
                         });
                     })
@@ -189,13 +228,13 @@ const dz = new Dropzone("#customDropzone", {
             // check discount applicable if applicable so check is discount duration
             let discount_applicable = false;
             let isactive_discount_duration = false;
-            if (value = "{{ old('discount_applicable') }}") {
+            if ("{{ old('discount_applicable') }}" || "{{ $product->discount }}") {
                 document.querySelector('#discount_percentage').removeAttribute("disabled");
                 document.querySelector('#isactive_discount_duration').removeAttribute("disabled");
                 discount_applicable = true;
             }
-            if (value = "{{ old('isactive_discount_duration') }}") {
-                document.querySelector('.time_range').setAttribute("disabled", "disabled");
+            if ("{{ old('isactive_discount_duration') }}" || "{{ $product->discount_start }}") {
+                document.querySelector('.time_range').removeAttribute("disabled", "disabled");
                 isactive_discount_duration = true;
             }
             document.querySelector('#discount_applicable').addEventListener('click', () => {
@@ -224,10 +263,8 @@ const dz = new Dropzone("#customDropzone", {
     </script>
 @endpush
 @section('main-content')
-    {{-- @if ($errors->any())
-    @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-    @endforeach
+    {{-- @if (isset($product->id))
+    @dd($product->description)  
 @endif --}}
     <span class="text-danger mb-5">
         @error('product_id')
@@ -317,7 +354,7 @@ const dz = new Dropzone("#customDropzone", {
             <div class="row g-5">
                 <div class="col-12 col-xl-8">
                     <h4 class="mb-3">Product Title</h4><input name="product_title"
-                        value="{{ old('product_title', 'Untitled Product') }}" id="product_title" class="form-control"
+                        value="{{ old('product_title', $product->title ?? 'Untitled Product') }}" id="product_title" class="form-control"
                         type="text" placeholder="Write product title here..." />
                     <span class="text-danger mb-5">
                         @error('product_title')
@@ -328,11 +365,7 @@ const dz = new Dropzone("#customDropzone", {
                         <h4 class="mb-3"> Product Description</h4>
                         <textarea class="tinymce" name="product_discription" id="product_description"
                             data-tinymce='{"height":"15rem","placeholder":"Write a description here..."}'>
-                            @if (old('product_discription'))
-                                {{ old('product_discription') }}
-                            @else
-                                No description yet.
-                            @endif
+                            {{ old('product_discription', $product->description ?? 'No description yet.') }}
                         </textarea>
                         <span class="text-danger  mb-3">
                             @error('product_discription')
@@ -346,7 +379,7 @@ const dz = new Dropzone("#customDropzone", {
                             Drag your photo here<span class="text-body-secondary px-1">or</span>
                             <button class="btn btn-link p-0" type="button">use from device</button>
                             <br>
-                            <img class="mt-3 me-2" src="{{ asset('/assets/img/icons/image-icon.png')}}" alt="">
+                            <img class="mt-3 me-2" src="{{ asset('/assets/img/icons/image-icon.png') }}" alt="">
                         </div>
                         <div id="dzPreviewContainer" class="dz-preview dz-preview-multiple m-0 d-flex flex-column"></div>
                     </div>
@@ -398,7 +431,7 @@ const dz = new Dropzone("#customDropzone", {
                                                 <input class="form-check-input" id="discount_applicable"
                                                     name="discount_applicable" id="flexSwitchCheckChecked"
                                                     type="checkbox" value="1"
-                                                    {{ old('discount_applicable') ? 'checked' : '' }} />
+                                                    @if (old('discount_applicable') || $product->discount){{'checked'}}@endif/>
                                                 <span class="text-danger  mb-3">
                                                     @error('discount_applicable')
                                                         {{ $message }}
@@ -409,7 +442,7 @@ const dz = new Dropzone("#customDropzone", {
                                         <div class="col-12 col-lg-6">
                                             <h5 class="mb-2 text-body-highlight">Discount percentage</h5><input
                                                 name="discount_percentage" id="discount_percentage" class="form-control"
-                                                type="number" placeholder="%" value="{{ old('discount_percentage') }}"
+                                                type="number" placeholder="%" value="{{ old('discount_percentage', $product->discount ?? 0) }}"
                                                 disabled />
                                             <span class="text-danger  mb-3">
                                                 @error('discount_percentage')
@@ -425,7 +458,8 @@ const dz = new Dropzone("#customDropzone", {
                                                 <input class="form-check-input" id="isactive_discount_duration"
                                                     name="isactive_discount_duration" id="flexSwitchCheckChecked"
                                                     type="checkbox" value="1"
-                                                    {{ old('isactive_discount_duration') ? 'checked' : '' }} disabled />
+                                                    disabled
+                                                    @if (old('isactive_discount_duration') || $product->discount_start){{'checked'}}@endif />
                                                 <span class="text-danger  mb-3">
                                                     @error('isactive_discount_duration')
                                                         {{ $message }}
@@ -436,7 +470,7 @@ const dz = new Dropzone("#customDropzone", {
                                         <div class="col-12 col-lg-6">
                                             <h5 class="mb-2 text-body-highlight">Discount Time Range</h5>
                                             <input class="form-control time_range datetimepicker flatpickr-input"
-                                                value="{{ old('time_range') }}" id="timepicker2" name="time_range"
+                                                value="{{ old('time_range', $discountDuration ?? '') }}" id="timepicker2" name="time_range"
                                                 type="text" placeholder="d/m/y to d/m/y"
                                                 data-options="{&quot;mode&quot;:&quot;range&quot;,&quot;dateFormat&quot;:&quot;d/m/y&quot;,&quot;disableMobile&quot;:true}"
                                                 disabled readonly="readonly">
