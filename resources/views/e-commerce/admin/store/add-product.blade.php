@@ -25,13 +25,12 @@
                 form_URL.setAttribute('action', "{{ route('discard-product') }}")
             }
         }
-        console.log(window.location.origin);
 
         // highlight selected nav item 
         navitemsactiveness('add-product')
         navitemvisibility('nv-store')
 
-        Dropzone.autoDiscover = false; // Phoenix.js ke auto init ko disable karta hai
+        Dropzone.autoDiscover = false;
 
         const BASE_URL = "{{ url('/') }}";
         const existingImages = @json($images)??null;
@@ -77,11 +76,10 @@
             init: function() {
                 const dropzone = this;
 
-                // 🧠 PRELOAD EXISTING IMAGES
+                // preload images exists
                 if (Array.isArray(existingImages) && existingImages.length > 0) {
                     existingImages.forEach(img => {
                         const imageUrl = `${BASE_URL}/images/${img.img_path}`;
-                        console.log("Preloading:", imageUrl);
 
                         const mockFile = {
                             name: img.img_path,
@@ -98,7 +96,7 @@
 
                         dropzone.files.push(mockFile);
 
-                        // ⚡️ Ensure remove button works for preloaded images
+                        // remove button works for preloaded images
                         setTimeout(() => {
                             const removeBtn = mockFile.previewElement?.querySelector(
                                 "[data-dz-remove]");
@@ -142,7 +140,6 @@
 
             success: function(file, response) {
                 file.serverId = response.image_id;
-                console.log("Uploaded:", response);
             }
         });
 
@@ -199,7 +196,6 @@
                         const option = document.createElement('option');
                         option.value = '';
                         option.textContent = 'Select';
-                        // option.setAttribute('selected', 'selected');
                         category.appendChild(option);
                         data.forEach(val => {
                             const option = document.createElement('option');
@@ -207,8 +203,6 @@
                             option.textContent = val.attribute_name;
                             if(option.value == selectedAttValue){
                                option.setAttribute('selected', 'selected');
-                               console.log("set hogya bhi" + option.value + selectedAttValue + typeof selectedAttValue + " , " + typeof option.value);
-                               
                             }
                             category.appendChild(option);
                         });
@@ -275,7 +269,7 @@
         <nav class="mb-3" aria-label="breadcrumb">
             <ol class="breadcrumb mb-0">
                 <li class="breadcrumb-item"><a href="#">Store</a></li>
-                <li class="breadcrumb-item active">Add Product</li>
+                <li class="breadcrumb-item active">{{$formType == "update" ? "Update" : "Add" ;}} Product</li>
             </ol>
         </nav>
 
@@ -339,7 +333,7 @@
             </div>
             <div class="row g-3 flex-between-end mb-5">
                 <div class="col-auto">
-                    <h2 class="mb-2">Add a product</h2>
+                    <h2 class="mb-2">{{$formType == "update" ? "Update" : "Add a" ;}} product</h2>
                     <h5 class="text-body-tertiary fw-semibold">Orders placed across your store</h5>
                 </div>
                 <div class="col-auto"><button class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0" type="button"
@@ -485,10 +479,10 @@
                                 <div class="tab-pane fade h-100" id="restockTabContent" role="tabpanel"
                                     aria-labelledby="restockTab">
                                     <div class="d-flex flex-column h-100">
-                                        <h5 class="mb-2 mt-4 text-body-highlight">Add to Stock</h5>
+                                        <h5 class="mb-2 mt-4 text-body-highlight">{{$formType == "update" ? "Update" : "Add" ;}} Stock</h5>
                                         <div class="row g-3 flex-1 mb-4">
                                             <div class="col-sm-7"><input class="form-control" name="quantity"
-                                                    value="{{ old('quantity', '0') }}" type="number"
+                                                    value="{{ old('quantity', $product->stock_quantity ?? 0) }}" type="number"
                                                     placeholder="Quantity" />
                                                 <span class="text-danger  mb-3">
                                                     @error('quantity')
@@ -505,7 +499,7 @@
                                         <h5 class="mb-2 mt-4 text-body-highlight">Delivery Charges</h5>
                                         <div class="row g-3 flex-1 mb-4">
                                             <div class="col-sm-7"><input class="form-control"
-                                                    value="{{ old('Delivery_charges', '0') }}" name="Delivery_charges"
+                                                    value="{{ old('Delivery_charges', $product->delivery_charges ?? 0) }}" name="Delivery_charges"
                                                     type="number" placeholder="Rs:" />
                                                 <span class="text-danger  mb-3">
                                                     @error('Delivery_charges')

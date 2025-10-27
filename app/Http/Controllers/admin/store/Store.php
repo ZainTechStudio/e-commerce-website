@@ -25,7 +25,8 @@ class Store extends Controller
                 $id = $checkIfExistDefaultPage->id;
                 $images = products_imgs::where('product_id', $id)->where('is_active',1)->get();
                 $product = $checkIfExistDefaultPage;
-                $data = compact('id','images','product');
+                $formType = "add";
+                $data = compact('id','images','product','formType');
                 return view('e-commerce.admin.store.add-product')->with($data);
             }
         }
@@ -50,12 +51,13 @@ class Store extends Controller
         $add_draft->is_draft = true;
         $add_draft->is_discard = true;
         $add_draft->save();
-
+        
         // select last id
         $product = products::latest('id')->first();
         $id = $product->id;
         $images = null;
-        $data = compact('id','images','product');
+        $formType = "add";
+        $data = compact('id','images','product','formType');
         return view('e-commerce.admin.store.add-product')->with($data);
     }
     public function add_product_pics(Request $request)
@@ -148,7 +150,8 @@ class Store extends Controller
         }
         $product->save();
         
-        return redirect()->route('product');
+        $msg1 = "Success: Product added successfully!";
+        return view('e-commerce.admin.store.products', compact('msg1'));
     }
     public function draft_product(Request $request)
     {
@@ -202,8 +205,8 @@ class Store extends Controller
             $product->discount_end = $end;
         }
         $product->save();
-        echo 'done';
-        // return redirect('/admin/product');
+        $msg1 = "Success: Product update successfully as draft product!";
+        return view('e-commerce.admin.store.products', compact('msg1'));
     }
     public function discard_product(Request $request)
     {
@@ -221,8 +224,8 @@ class Store extends Controller
             $pro_img->is_active = 0;
             $pro_img->save();
         }
-        echo 'done';
-        // return redirect('/admin/product');
+        $msg1 = "Success: Product update successfully as discarded product!";
+        return view('e-commerce.admin.store.products', compact('msg1'));
     }
     public function product()
     {
@@ -290,7 +293,8 @@ class Store extends Controller
         $discountFrom = \Carbon\Carbon::createFromFormat('Y-m-d', $product->discount_start)->format('d/m/y');
         $discountTo = \Carbon\Carbon::createFromFormat('Y-m-d', $product->discount_end)->format('d/m/y');
         $discountDuration = "$discountFrom to $discountTo";
-        return view('e-commerce.admin.store.add-product', compact('product', 'images','id','discountDuration'));
+        $formType = "update";
+        return view('e-commerce.admin.store.add-product', compact('product', 'images','id','discountDuration','formType'));
     }
     public function customer_details()
     {

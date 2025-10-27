@@ -151,6 +151,19 @@
                 <li class="breadcrumb-item active">Products</li>
             </ol>
         </nav>
+        @if (isset($msg1))
+            <div class="alert alert-outline-success d-flex align-items-center mt-3" role="alert">
+                <span class="fas fa-check-circle text-success fs-5 me-3"></span>
+                <p class="mb-0 flex-1">{{ $msg1 }}</p>
+                <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @elseif (isset($msg2))
+            <div class="alert alert-outline-danger d-flex align-items-center mt-3" role="alert">
+                <span class="fas fa-times-circle text-danger fs-5 me-3"></span>
+                <p class="mb-0 flex-1">{{ $msg2 }}</p>
+                <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <div class="mb-9">
             <div class="row g-3 mb-4">
                 <div class="col-auto">

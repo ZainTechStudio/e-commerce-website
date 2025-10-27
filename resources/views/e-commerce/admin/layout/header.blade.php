@@ -111,7 +111,7 @@
                     <ul class="nav collapse parent nav-visibility" data-bs-parent="#navbarVerticalCollapse" id="nv-store">
                       <li class="collapsed-nav-item-title d-none">Store</li>
                       <li class="nav-item"><a id="add-product" class="nav-link nav-active-link" href="{{ route('add-product') }}">
-                          <div class="d-flex align-items-center"><span class="nav-link-text">Add product</span></div>
+                          <div class="d-flex align-items-center"><span class="nav-link-text">Manage Product</span></div>
                         </a><!-- more inner pages-->
                       </li>
                       <li class="nav-item"><a id="product" class="nav-link nav-active-link" href="{{ route('product') }}">
@@ -750,7 +750,7 @@
             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle lh-1" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false"><span data-feather="shopping-cart"></span>&nbsp;&nbsp;Store</a>
               <ul class="dropdown-menu navbar-dropdown-caret">
                 <li><a class="dropdown-item nav-active-link" id="add-product" href="{{ route('add-product') }}">
-                    <div class="dropdown-item-wrapper"><span class="me-2 uil"></span>Add product</div>
+                    <div class="dropdown-item-wrapper"><span class="me-2 uil"></span>Manage Product</div>
                   </a></li>
                 <li><a class="dropdown-item nav-active-link" id="product" href="{{ route('product') }}">
                     <div class="dropdown-item-wrapper"><span class="me-2 uil"></span>Products</div>
@@ -1016,7 +1016,7 @@
             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle lh-1" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false"><span data-feather="shopping-cart"></span>&nbsp;&nbsp;Store</a>
               <ul class="dropdown-menu navbar-dropdown-caret">
                 <li><a class="dropdown-item nav-active-link" id="add-product" href="{{ route('add-product') }}">
-                    <div class="dropdown-item-wrapper"><span class="me-2 uil"></span>Add product</div>
+                    <div class="dropdown-item-wrapper"><span class="me-2 uil"></span>Manage Product</div>
                   </a></li>
                 <li><a class="dropdown-item nav-active-link" id="product" href="{{ route('product') }}">
                     <div class="dropdown-item-wrapper"><span class="me-2 uil"></span>Products</div>
@@ -1284,7 +1284,7 @@
             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle lh-1" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false"><span data-feather="shopping-cart"></span>&nbsp;&nbsp;Store</a>
               <ul class="dropdown-menu navbar-dropdown-caret">
                 <li><a class="dropdown-item nav-active-link" id="add-product" href="{{ route('add-product') }}">
-                    <div class="dropdown-item-wrapper"><span class="me-2 uil"></span>Add product</div>
+                    <div class="dropdown-item-wrapper"><span class="me-2 uil"></span>Manage Product</div>
                   </a></li>
                 <li><a class="dropdown-item nav-active-link" id="product" href="{{ route('product') }}">
                     <div class="dropdown-item-wrapper"><span class="me-2 uil"></span>Products</div>
@@ -1550,7 +1550,7 @@
             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle lh-1" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false"><span data-feather="shopping-cart"></span>&nbsp;&nbsp;Store</a>
               <ul class="dropdown-menu navbar-dropdown-caret">
                 <li><a class="dropdown-item nav-active-link" id="add-product" href="{{ route('add-product') }}">
-                    <div class="dropdown-item-wrapper"><span class="me-2 uil"></span>Add product</div>
+                    <div class="dropdown-item-wrapper"><span class="me-2 uil"></span>Manage Product</div>
                   </a></li>
                 <li><a class="dropdown-item nav-active-link" id="product" href="{{ route('product') }}">
                     <div class="dropdown-item-wrapper"><span class="me-2 uil"></span>Products</div>
@@ -2148,7 +2148,7 @@
               <li class="nav-item dropdown"><a class="nav-link dropdown-toggle lh-1" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false"><span data-feather="shopping-cart"></span>&nbsp;&nbsp;Store</a>
                 <ul class="dropdown-menu navbar-dropdown-caret">
                   <li><a class="dropdown-item nav-active-link" id="add-product" href="{{ route('add-product') }}">
-                      <div class="dropdown-item-wrapper"><span class="me-2 uil"></span>Add product</div>
+                      <div class="dropdown-item-wrapper"><span class="me-2 uil"></span>Manage Product</div>
                     </a></li>
                   <li><a class="dropdown-item nav-active-link" id="product" href="{{ route('product') }}">
                       <div class="dropdown-item-wrapper"><span class="me-2 uil"></span>Products</div>
