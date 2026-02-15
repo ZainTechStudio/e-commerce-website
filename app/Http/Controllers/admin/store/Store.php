@@ -290,11 +290,17 @@ class Store extends Controller
     {
         $product = products::findOrFail($id);
         $images = products_imgs::where('product_id', $id)->where('is_active',1)->get();
-        $discountFrom = \Carbon\Carbon::createFromFormat('Y-m-d', $product->discount_start)->format('d/m/y');
-        $discountTo = \Carbon\Carbon::createFromFormat('Y-m-d', $product->discount_end)->format('d/m/y');
-        $discountDuration = "$discountFrom to $discountTo";
         $formType = "update";
-        return view('e-commerce.admin.store.add-product', compact('product', 'images','id','discountDuration','formType'));
+
+        if (isset($product->discount) && isset($product->discount_start) && isset($product->discount_end)) {
+            $discountTo = \Carbon\Carbon::createFromFormat('Y-m-d', $product->discount_end)->format('d/m/y');
+            $discountFrom = \Carbon\Carbon::createFromFormat('Y-m-d', $product->discount_start)->format('d/m/y');
+            $discountDuration = "$discountFrom to $discountTo";
+            $data = compact('product', 'images','id','discountDuration', 'formType');
+            return view('e-commerce.admin.store.add-product', $data);
+        }
+        $data = compact('product', 'images','id', 'formType');
+        return view('e-commerce.admin.store.add-product', $data);
     }
     public function customer_details()
     {

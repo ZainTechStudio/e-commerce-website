@@ -410,7 +410,7 @@
                                         <div class="col-12 col-lg-12">
                                             <h5 class="mb-2 text-body-highlight">Product price</h5><input
                                                 name="product_price" class="form-control" type="text"
-                                                value="{{ old('product_price', '0') }}" placeholder="Rs" />
+                                                value="{{ old('product_price', $product->price ?? 0) }}" placeholder="Rs" />
                                             <span class="text-danger  mb-3">
                                                 @error('product_price')
                                                     {{ $message }}

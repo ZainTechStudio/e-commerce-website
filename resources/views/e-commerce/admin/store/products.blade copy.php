@@ -34,9 +34,9 @@
     </div>
     <ul class="nav nav-links mb-3 mb-lg-2 mx-n3">
       <li class="nav-item"><a class="nav-link active" aria-current="page" href="#"><span>All </span><span class="text-body-tertiary fw-semibold">(68817)</span></a></li>
-      <li class="nav-item"><a class="nav-link" href="#"><span>Published </span><span class="text-body-tertiary fw-semibold">(70348)</span></a></li>
-      <li class="nav-item"><a class="nav-link" href="#"><span>Drafts </span><span class="text-body-tertiary fw-semibold">(17)</span></a></li>
-      <li class="nav-item"><a class="nav-link" href="#"><span>On discount </span><span class="text-body-tertiary fw-semibold">(810)</span></a></li>
+      <li class="nav-item"><a class="nav-link" href="#"><span>Published </span><span id="total_publish" class="text-body-tertiary fw-semibold">(70348)</span></a></li>
+      <li class="nav-item"><a class="nav-link" href="#"><span>Drafts </span><span id="total_draft" class="text-body-tertiary fw-semibold">(17)</span></a></li>
+      <li class="nav-item"><a class="nav-link" href="#"><span>On discount </span><span id="total_on_discount" class="text-body-tertiary fw-semibold">(810)</span></a></li>
     </ul>
     <div id="products" data-list='{"valueNames":["product","price","category","tags","vendor","time"],"page":10,"pagination":true}'>
       <div class="mb-4">

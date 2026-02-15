@@ -14,18 +14,38 @@
         navitemsactiveness('product')
         navitemvisibility('nv-store')
     </script>
-    <script>
-        // document.addEventListener("DOMContentLoaded", function () {
-        //   var options = {
-        //     valueNames: ["product", "price", "category", "tags", "vendor", "time"]
-        //   };
-
-        //   var productList = new List("products", options);
-        // });
-    </script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function() {
+            $.ajax({
+                url: '{{ route('api.fetch.totalproduct') }}',
+                method: 'GET',
+                success: function(response) {
+                    console.log(response.count);
+                    $('#total_all').text(`(${response.count})`);
+                }
+            });
+            $.ajax({
+                url: '{{ route('api.fetch.totalproduct.published') }}',
+                method: 'GET',
+                success: function(response) {
+                    $('#total_publish').text(`(${response.count})`);
+                }
+            });
+            $.ajax({
+                url: '{{ route('api.fetch.totalproduct.draft') }}',
+                method: 'GET',
+                success: function(response) {
+                    $('#total_draft').text(`(${response.count})`);
+                }
+            });
+            $.ajax({
+                url: '{{ route('api.fetch.totalproduct.ondiscount') }}',
+                method: 'GET',
+                success: function(response) {
+                    $('#total_on_discount').text(`(${response.count})`);
+                }
+            });
             function fetch_products(productsType) {
                 let url = '';
                 switch (productsType) {
@@ -172,13 +192,13 @@
             </div>
             <ul class="nav nav-links mb-3 mb-lg-2 mx-n3">
                 <li class="nav-item"><a class="nav-link productTypes active" aria-current="page" href="#"><span>All
-                        </span><span class="text-body-tertiary fw-semibold">(68817)</span></a></li>
-                <li class="nav-item"><a class="nav-link productTypes" href="#"><span>Published </span><span
-                            class="text-body-tertiary fw-semibold">(70348)</span></a></li>
-                <li class="nav-item"><a class="nav-link productTypes" href="#"><span>Drafts </span><span
-                            class="text-body-tertiary fw-semibold">(17)</span></a></li>
-                <li class="nav-item"><a class="nav-link productTypes" href="#"><span>On discount </span><span
-                            class="text-body-tertiary fw-semibold">(810)</span></a></li>
+                        </span><span class="text-body-tertiary fw-semibold" id="total_all">()</span></a></li>
+                <li class="nav-item"><a class="nav-link productTypes" href="#"><span>Published </span><span id="total_publish" 
+                            class="text-body-tertiary fw-semibold">()</span></a></li>
+                <li class="nav-item"><a class="nav-link productTypes" href="#"><span>Drafts </span><span id="total_draft" 
+                            class="text-body-tertiary fw-semibold">()</span></a></li>
+                <li class="nav-item"><a class="nav-link productTypes" href="#"><span>On discount </span><span id="total_on_discount"
+                            class="text-body-tertiary fw-semibold">()</span></a></li>
             </ul>
             <div id="products"
                 data-list='{"valueNames":["product","price","category","tags","vendor","time"],"page":10,"pagination":true}'>
